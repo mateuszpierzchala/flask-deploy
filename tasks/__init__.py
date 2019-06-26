@@ -4,15 +4,15 @@
 Created on Mon Jun 24 09:17:54 2019
 
 @author: osboxes
-"""
+""" 
+"""inicjalizacja polaczenia z celery"""
 
-"""to zestaw klas konfiguracyjnych z ktorych jedna jest wybierana przez "APP_ENV" 
-kiedy aplikacja zostanie uruchomiona kod w __init__.py utworzy instancje jednej z tych klas nadpisujac 
-wartosci pol zmiennymi srodowiskowymi (jesli istnieja)"""
+from celery import Celery
+import config
 
-class BaseConfig():
-    API_PREFIX = '/api'
-    TESTING = False
-    DEBUG = False
-    
-class Dev Config(BaseConfig)
+def make_celery():
+    celery=Celery(__name__, broker=config.CELERY_BROKER)
+    celery.conf.update(config.as_dict())
+    return celery
+
+celery = make_celery()
