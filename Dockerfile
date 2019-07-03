@@ -2,7 +2,7 @@ FROM 	 python:3.7.2
 
 RUN 	pip install pipenv
 
-ADD ./flask-deploy
+ADD . /flask-deploy
 
 WORKDIR	/flask-deploy
 
